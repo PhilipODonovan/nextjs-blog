@@ -10,7 +10,7 @@ export async function GET(req, res) {
   
    // const url = 'mongodb://root:example@localhost:27017/';
    
-   const url = 'mongodb+srv://kyle:vurg1fChCkNTR0zo@cluster0.vgnfxgh.mongodb.net/?retryWrites=true&w=majority';
+   const url = 'mongodb://root:example@localhost:27017/admin';
    const client = new MongoClient(url);
     
    
@@ -19,7 +19,7 @@ export async function GET(req, res) {
     await client.connect();
     console.log('Connected successfully to server');
     const db = client.db(dbName);
-    const collection = db.collection('products'); // collection name
+    const collection = db.collection('bevs'); // collection name
   
   
     const findResult = await collection.find({}).toArray();

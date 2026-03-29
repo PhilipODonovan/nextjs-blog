@@ -1,21 +1,7 @@
 'use client';
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Image from 'next/image';
 
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {ThemeProvider } from '@mui/material/styles';
-
-import { createTheme } from '@mui/material/styles';
-import { green, purple } from '@mui/material/colors';
 import { useState, useEffect } from 'react'
 
 
@@ -68,50 +54,47 @@ export default function Page() {
 
 
 
-  
-  const theme = createTheme({
-    palette: {
-     
-      secondary: {
-        main: green[500],
-      },
-    },
-  });
-  
-
-
-
 
 
   if (!weather) return <p>No weather</p>
   
   return (
-    <ThemeProvider theme={theme}>
-      Today's temperature: {JSON.stringify(weather.temp)}
-    <Container component="main"  maxWidth="xs">
  
-       <div style={{fontSize: '40px'}} > Dashboard</div>
+  
+        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+          
+
+                <div style={{fontSize: '40px'}} > Dashboard</div>
         <div>
       {
         data.map((item, i) => (
-          <div style={{padding: '20px'}} key={i} >
+          <div style={{padding: '20px'}} key={i} className="flex-grid col-span-4 gap-4" >
+            <div>
             Unique ID: {item._id}
-            <br></br>
-            {item.pname}
+            </div>
+            <div className="flex col-span-4">
+            {item.make}
             - 
+            {item.model}
+            - 
+            {item.variant}
+            </div>
+            <div>
+            - €
             {item.price}
-            <br></br>
-            <Button onClick={() => putInCart(item.pname)} variant="outlined"> Add to cart </Button>
+            </div>
+            <div className='col-span-2'>
+            <Image src={`/${item.image}`} width={200} height={100} className="h-auto w-auto" alt="car image" loading="eager"  />
+            </div>
+            <button className="flex justify-center rounded-md bg-indigo-500 px-3 py-1.5
+             text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" onClick={() => putInCart(item.make)}> Add to cart </button>
           </div>
         ))
       }
     </div>
-
-    </Container>
-
-    </ThemeProvider>
-
-  );
+      
+</div>  
+    );
 }
 
 
